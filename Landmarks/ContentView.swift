@@ -2,26 +2,44 @@ import SwiftUI
 
 struct ContentView: View {
   var body: some View {
-    VStack(alignment: .leading) {
-      Text("Turtle Rock")
-        .font(.title)
+    VStack {
+      MapView()
+        .ignoresSafeArea(edges: .top)
+        .frame(height: 300)
 
-      HStack {
-        Text("Joshua Tree National Park")
-          .font(.subheadline)
+      CircleImage()
+        .offset(y: -130)
+        .padding(.bottom, -130)
 
-        Spacer()
+      VStack(alignment: .leading) {
+        Text("Turtle Rock")
+          .font(.title)
 
-        Text("California")
-          .font(.subheadline)
+        HStack {
+          Text("Joshua Tree National Park")
+          Spacer()
+          Text("California")
+        }
+        .font(.subheadline)
+        .foregroundColor(.secondary)
+
+        Divider()
+
+        Text("About Turtle Rock")
+          .font(.title2)
+        Text("Descriptive text goes here.")
       }
+      .padding()
+
+      Spacer()
     }
-    .padding()
   }
 }
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     ContentView()
+      .previewDevice("iPhone 13")
+      .previewInterfaceOrientation(.portrait)
   }
 }
