@@ -112,11 +112,11 @@
 		98A2613928B198A000FEE658 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				98A2611F28B169B900FEE658 /* ContentView.swift */,
 				98CF8FD028B29C8100993DE6 /* Hikes */,
 				98CF8FC928B28F9700993DE6 /* Badges */,
 				98CF8FBE28B24A0E00993DE6 /* Landmarks */,
 				98CF8FBB28B249C700993DE6 /* Helpers */,
-				98A2611F28B169B900FEE658 /* ContentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
