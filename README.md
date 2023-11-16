@@ -6,7 +6,7 @@ A simple app from [Apple's SwiftUI tutorial](https://developer.apple.com/tutoria
 
 This app uses XCTestPlans.
 
-### Locally
+### Running locally
 
 ```
 xcodebuild test \
@@ -14,12 +14,12 @@ xcodebuild test \
   -destination 'platform=iOS Simulator,name=iPhone 15'
 ```
 
-### BrowserStack
+### Running on BrowserStack
 
 First, get your credentials from BrowserStack:
 
 ```
-export BROWSERSTACK_CREDS=bartekpacia_ODK8TJ:cyc1fLfWkqBxHuzkK4ag
+export BROWSERSTACK_CREDS=bartekpacia_XXXXXX:XXXXXYYYYYTTTTTEEEEE
 ```
 
 Then, simply run `bs_ios`:
@@ -27,3 +27,6 @@ Then, simply run `bs_ios`:
 ```
 ./bs_ios
 ```
+
+If it fails because of code-signing, open Xcode and try ticking "Automatic Code
+Signing" and modifying the bundle identifier if it's taken.

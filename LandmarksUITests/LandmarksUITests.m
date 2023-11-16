@@ -25,8 +25,8 @@
 
     void (^anonymousFunc)(ParametrizedTests *) = ^(ParametrizedTests *instance) {
       NSLog(@"anonymousFunc called!");
-      // XCTFail(@"This is a custom message from test: %@ \n\n\n and this is a newline", name);
-      XCTAssertTrue(NO, @"%@", @"test name is %@ \n\n\n newline", name);
+      XCTFail(@"This is a custom message from test: %@ \n\n\n and this is a newline", name);
+      // XCTAssertTrue(NO, @"%@", @"test name is %@ \n\n\n newline", name);
     };
 
     IMP implementation = imp_implementationWithBlock(anonymousFunc);

@@ -32,6 +32,7 @@
 		98CF8FD728B29C8100993DE6 /* HikeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CF8FD328B29C8100993DE6 /* HikeDetail.swift */; };
 		98CF8FD828B29C8100993DE6 /* HikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CF8FD428B29C8100993DE6 /* HikeView.swift */; };
 		98E104662B0514090089984F /* LandmarksUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 98E104652B0514090089984F /* LandmarksUITests.m */; };
+		98EFCC512B0640C000862029 /* StandardUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFCC502B0640C000862029 /* StandardUITests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		98E104632B0514090089984F /* LandmarksUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LandmarksUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		98E104652B0514090089984F /* LandmarksUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LandmarksUITests.m; sourceTree = "<group>"; };
 		98E1046E2B0517A70089984F /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
+		98EFCC502B0640C000862029 /* StandardUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StandardUITests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				98E104652B0514090089984F /* LandmarksUITests.m */,
+				98EFCC502B0640C000862029 /* StandardUITests.m */,
 			);
 			path = LandmarksUITests;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98EFCC512B0640C000862029 /* StandardUITests.m in Sources */,
 				98E104662B0514090089984F /* LandmarksUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
