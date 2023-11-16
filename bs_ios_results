@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+BROWSERSTACK_CREDS="${BROWSERSTACK_CREDS:-}"
+
+build_id="421564efde258467f2a210a45c8c2a4da2078612"
+
+# get session_id
+session_id="$(
+    curl -s -u "$BROWSERSTACK_CREDS" \
+        -X GET "https://api-cloud.browserstack.com/app-automate/xcuitest/v2/builds/{$build_id}" |
+        jq --raw-output .devices[0].sessions[0].id
+)"
+
+# get session details
+session_details="$(
+    curl -s -u "$BROWSERSTACK_CREDS" \
+        -X GET "https://api-cloud.browserstack.com/app-automate/xcuitest/v2/builds/${build_id}/sessions/${session_id}"
+)"
+
+instrumentation_logs_url=$(echo "$session_details" | jq --raw-output .testcases.data[0].testcases[0].instrumentation_log)
+device_logs_url=$(echo "$session_details" | jq --raw-output .testcases.data[0].testcases[0].device_log)
+
+# get session video
+# session_video="$(
+#     curl -u "$BROWSERSTACK_CREDS" \
+#         -O "https://api.browserstack.com/app-automate/xcuitest/builds/6b37ffd24d8952a94f8b28db2185fbdaeb7408cf/sessions/tests/458deeea7daf2fe575f11e6ce5c5b9eaff3266e3134c7934/video#t=0,377"
+# )"
+
+# get session details
+instrumentation_logs=$(curl -s -u "$BROWSERSTACK_CREDS" -X GET "$instrumentation_logs_url")
+echo "$instrumentation_logs" >instrumentation_logs.txt
+
+# get session details
+device_logs=$(curl -s -u "$BROWSERSTACK_CREDS" -X GET "$device_logs_url")
+echo "$device_logs" >device_logs.txt
+
+# https://www.browserstack.com/docs/app-automate/api-reference/espresso/apps#upload-an-app
+curl -s -u "$BROWSERSTACK_CREDS" \
+    -X GET "https://api-cloud.browserstack.com/app-automate/xcuitest/v2/builds/${build_id}/sessions/${session_id}/resultbundle" --output ios_report.zip
+
+unzip ios_report.zip >/dev/null
+rm -rf ios_report.zip
+
+# curl -s -LJo xcresultparser.zip https://github.com/a7ex/xcresultparser/releases/download/1.5.0/xcresultparser.zip
+# unzip xcresultparser.zip >/dev/null
+# rm -rf xcresultparser.zip
+# chmod +x product/xcresultparser
+
+# product/xcresultparser "result-bundle.xcresult" -o junit >result-bundle.xml
+# echo "Junit XML report has been written to $PWD/result-bundle.xml"
