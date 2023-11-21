@@ -58,5 +58,6 @@ jobs:
             -scheme Landmarks \
             -only-testing LandmarksUITests \
             -configuration Debug \
-            -sdk iphoneos -destination 'platform=iOS Simulator,name=iPhone 14' \
+            -sdk iphoneos \
+            -destination 'platform=iOS Simulator,OS=16.2,name=iPhone 14' \
             | xcbeautify --renderer github-actions

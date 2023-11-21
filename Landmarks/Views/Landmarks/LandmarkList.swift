@@ -14,6 +14,15 @@ struct LandmarkList: View {
     }
   }
 
+  func makeLabel(_ landmark: Landmark) -> String {
+    var label = landmark.name
+    if landmark.isFavorite {
+      label = label + ", favorited"
+    }
+
+    return label
+  }
+
   var body: some View {
     NavigationView {
       List {
@@ -25,6 +34,7 @@ struct LandmarkList: View {
             LandmarkDetail(landmark: landmark)
           } label: {
             LandmarkRow(landmark: landmark)
+              .accessibilityLabel(makeLabel(landmark))
           }
           .navigationTitle("Landmarks")
         }
