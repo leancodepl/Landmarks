@@ -54,7 +54,6 @@ jobs:
         run: |
           set -o pipefail
           xcodebuild test \
-            -workspace Landmarks.xcworkspace \
             -scheme Landmarks \
             -only-testing LandmarksUITests \
             -configuration Debug \
