@@ -42,6 +42,7 @@ jobs:
             | xargs -I {} clang-format --dry-run --Werror {}
 
       - name: Start iOS simulator
+        if: success() || failure()
         uses: futureware-tech/simulator-action@v2
         with:
           model: iPhone 14

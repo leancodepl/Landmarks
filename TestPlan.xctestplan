@@ -1,0 +1,28 @@
+{
+  "configurations" : [
+    {
+      "id" : "22044977-F61F-42AA-A608-D66AB9D36992",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Landmarks.xcodeproj",
+      "identifier" : "98A2611928B169B900FEE658",
+      "name" : "Landmarks"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Landmarks.xcodeproj",
+        "identifier" : "989490032B0CE475001B6A7A",
+        "name" : "LandmarksUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
