@@ -6,6 +6,18 @@
 
 @implementation LandmarksUITests
 
+// Called when -only-testing is specified.
++ (BOOL)instancesRespondToSelector:(SEL)aSelector {
+  NSLog(@"DBG: Called instancesRespondToSelector with arg: %@", NSStringFromSelector(aSelector));
+
+  // QUESTION: Why is this override not working?
+  // ANSWER: You were using respondsToSelector instead of instancesRespondToSelector, LOL
+
+  BOOL result = [super instancesRespondToSelector:aSelector];
+  NSLog(@"DBG: super.instancesRespondToSelector result: %@", result ? @"YES" : @"NO");
+  return result;
+}
+
 - (void)testFavorite {
   XCUIApplication *app = [[XCUIApplication alloc] init];
   [app launch];

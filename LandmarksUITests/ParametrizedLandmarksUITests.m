@@ -13,6 +13,7 @@
 - (instancetype)initWithSelector:(SEL)selector {
   // NSLog(@"Called initWithSelector with arg: %@",
   // NSStringFromSelector(selector));
+  
   return [super initWithSelector:selector];
 }
 
@@ -49,39 +50,30 @@
         (unsigned long)dartTestFiles.count);
 
   for (int i = 0; i < dartTestFiles.count; i++) {
-    /* Step 1 */
-
     NSString *name = dartTestFiles[i];
-
-    void (^anonymousFunc)(ParametrizedLandmarksUITests *) =
-        ^(ParametrizedLandmarksUITests *instance) {
-          NSLog(@"anonymousFunc called!");
-          // XCTFail(@"This is a custom message from test: %@ \n\n\n and this is
-          // a newline", name); XCTAssertTrue(NO, @"%@", @"test name is %@
-          // \n\n\n newline", name);
-        };
-
-    IMP implementation = imp_implementationWithBlock(anonymousFunc);
-    NSString *selectorStr = [NSString stringWithFormat:@"%@", name];
-    SEL selector = NSSelectorFromString(selectorStr);
-    class_addMethod(self, selector, implementation, "v@:");
-
-    /* Step 2 */
-
-    NSMethodSignature *signature =
-        [self instanceMethodSignatureForSelector:selector];
-    NSInvocation *invocation =
-        [NSInvocation invocationWithMethodSignature:signature];
-    invocation.selector = selector;
-
-    NSLog(@"RunnerUITests.testInvocations(): selectorStr = %@", selectorStr);
-
+    NSInvocation  *invocation = [self createInvocationWithName:name];
     [invocations addObject:invocation];
   }
 
   NSLog(@"After the loop");
 
   return invocations;
+}
+
++ (NSInvocation*)createInvocationWithName:(NSString *)name {
+  void (^block)(ParametrizedLandmarksUITests *) = ^(ParametrizedLandmarksUITests *instance) {
+    NSLog(@"Test method for %@ called!", name);
+  };
+  
+  IMP implementation = imp_implementationWithBlock(block);
+  NSString *selectorStr = [NSString stringWithFormat:@"test_%@", name];
+  SEL selector = NSSelectorFromString(selectorStr);
+  class_addMethod(self, selector, implementation, "v@:");
+  
+  NSMethodSignature *signature = [self instanceMethodSignatureForSelector:selector];
+  NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+  invocation.selector = selector;
+  return invocation;
 }
 
 @end
