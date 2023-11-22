@@ -1,0 +1,63 @@
+name: patrol prepare
+
+on:
+    workflow_dispatch:
+    pull_request:
+
+jobs:
+  prepare-ios:
+    runs-on: ${{ matrix.os }}
+    name: iOS on ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest]
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Install tools
+        run: |
+          brew update
+          brew install swift-format
+          brew install clang-format
+          brew install xcbeautify
+
+      - name: swift-format lint
+        run: test -z $(swift-format lint --recursive --strict .)
+
+      - name: swift-format format
+        if: success() || failure()
+        run: |
+          swift-format format --recursive --in-place .
+          git update-index --refresh
+          git diff-index --quiet HEAD --
+
+      - name: clang-format
+        if: success() || failure()
+        run: |
+          find . -iname '*.h' -o -iname '*.m' \
+            | xargs -I {} clang-format --dry-run --Werror {}
+
+      - name: Start iOS simulator
+        if: success() || failure()
+        uses: futureware-tech/simulator-action@v2
+        with:
+          model: iPhone 14
+          os: iOS
+          os_version: 16.2
+          erase_before_boot: true
+          shutdown_after_job: true
+
+      - name: Run UI tests
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -scheme Landmarks \
+            -only-testing LandmarksUITests \
+            -configuration Debug \
+            -sdk iphoneos \
+            -destination 'platform=iOS Simulator,OS=16.2,name=iPhone 14' \
+            | xcbeautify --renderer github-actions
