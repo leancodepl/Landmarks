@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		985FF2362B0DFF2E00F54BAF /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = 985FF2352B0DFF2E00F54BAF /* Quick */; };
 		985FF2392B0E000D00F54BAF /* QuickLandmarksUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985FF2382B0E000D00F54BAF /* QuickLandmarksUITests.swift */; };
+		985FF23B2B0E3D9400F54BAF /* ParametrizedLandmarksUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 985FF23A2B0E3D9400F54BAF /* ParametrizedLandmarksUITests.m */; };
 		989490072B0CE475001B6A7A /* LandmarksUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 989490062B0CE475001B6A7A /* LandmarksUITests.m */; };
 		98A2611E28B169B900FEE658 /* LandmarksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A2611D28B169B900FEE658 /* LandmarksApp.swift */; };
 		98A2612028B169B900FEE658 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A2611F28B169B900FEE658 /* ContentView.swift */; };
@@ -49,6 +50,7 @@
 /* Begin PBXFileReference section */
 		985FF2372B0E000D00F54BAF /* LandmarksUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LandmarksUITests-Bridging-Header.h"; sourceTree = "<group>"; };
 		985FF2382B0E000D00F54BAF /* QuickLandmarksUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickLandmarksUITests.swift; sourceTree = "<group>"; };
+		985FF23A2B0E3D9400F54BAF /* ParametrizedLandmarksUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ParametrizedLandmarksUITests.m; sourceTree = "<group>"; };
 		989490042B0CE475001B6A7A /* LandmarksUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LandmarksUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		989490062B0CE475001B6A7A /* LandmarksUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LandmarksUITests.m; sourceTree = "<group>"; };
 		9894900F2B0CEB2C001B6A7A /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				989490062B0CE475001B6A7A /* LandmarksUITests.m */,
 				985FF2382B0E000D00F54BAF /* QuickLandmarksUITests.swift */,
 				985FF2372B0E000D00F54BAF /* LandmarksUITests-Bridging-Header.h */,
+				985FF23A2B0E3D9400F54BAF /* ParametrizedLandmarksUITests.m */,
 			);
 			path = LandmarksUITests;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 			files = (
 				989490072B0CE475001B6A7A /* LandmarksUITests.m in Sources */,
 				985FF2392B0E000D00F54BAF /* QuickLandmarksUITests.swift in Sources */,
+				985FF23B2B0E3D9400F54BAF /* ParametrizedLandmarksUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
