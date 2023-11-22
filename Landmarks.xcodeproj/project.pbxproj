@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		985FF2362B0DFF2E00F54BAF /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = 985FF2352B0DFF2E00F54BAF /* Quick */; };
+		985FF2392B0E000D00F54BAF /* QuickLandmarksUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985FF2382B0E000D00F54BAF /* QuickLandmarksUITests.swift */; };
 		989490072B0CE475001B6A7A /* LandmarksUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 989490062B0CE475001B6A7A /* LandmarksUITests.m */; };
 		98A2611E28B169B900FEE658 /* LandmarksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A2611D28B169B900FEE658 /* LandmarksApp.swift */; };
 		98A2612028B169B900FEE658 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A2611F28B169B900FEE658 /* ContentView.swift */; };
@@ -45,6 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		985FF2372B0E000D00F54BAF /* LandmarksUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LandmarksUITests-Bridging-Header.h"; sourceTree = "<group>"; };
+		985FF2382B0E000D00F54BAF /* QuickLandmarksUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickLandmarksUITests.swift; sourceTree = "<group>"; };
 		989490042B0CE475001B6A7A /* LandmarksUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LandmarksUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		989490062B0CE475001B6A7A /* LandmarksUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LandmarksUITests.m; sourceTree = "<group>"; };
 		9894900F2B0CEB2C001B6A7A /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
@@ -80,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				985FF2362B0DFF2E00F54BAF /* Quick in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +102,8 @@
 			isa = PBXGroup;
 			children = (
 				989490062B0CE475001B6A7A /* LandmarksUITests.m */,
+				985FF2382B0E000D00F54BAF /* QuickLandmarksUITests.swift */,
+				985FF2372B0E000D00F54BAF /* LandmarksUITests-Bridging-Header.h */,
 			);
 			path = LandmarksUITests;
 			sourceTree = "<group>";
@@ -232,6 +239,9 @@
 				9894900B2B0CE475001B6A7A /* PBXTargetDependency */,
 			);
 			name = LandmarksUITests;
+			packageProductDependencies = (
+				985FF2352B0DFF2E00F54BAF /* Quick */,
+			);
 			productName = LandmarksUITests;
 			productReference = 989490042B0CE475001B6A7A /* LandmarksUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -265,6 +275,7 @@
 				TargetAttributes = {
 					989490032B0CE475001B6A7A = {
 						CreatedOnToolsVersion = 15.0.1;
+						LastSwiftMigration = 1500;
 						TestTargetID = 98A2611928B169B900FEE658;
 					};
 					98A2611928B169B900FEE658 = {
@@ -281,6 +292,9 @@
 				Base,
 			);
 			mainGroup = 98A2611128B169B900FEE658;
+			packageReferences = (
+				985FF2342B0DFF2E00F54BAF /* XCRemoteSwiftPackageReference "Quick" */,
+			);
 			productRefGroup = 98A2611B28B169B900FEE658 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -318,6 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				989490072B0CE475001B6A7A /* LandmarksUITests.m in Sources */,
+				985FF2392B0E000D00F54BAF /* QuickLandmarksUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,6 +380,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = U3EG6EALX7;
@@ -377,6 +393,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = pl.leancode.patrol.Landmarks.LandmarksUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "LandmarksUITests/LandmarksUITests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Landmarks;
 			};
@@ -388,6 +407,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = U3EG6EALX7;
@@ -400,6 +420,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = pl.leancode.patrol.Landmarks.LandmarksUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "LandmarksUITests/LandmarksUITests-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Landmarks;
 			};
@@ -610,6 +632,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		985FF2342B0DFF2E00F54BAF /* XCRemoteSwiftPackageReference "Quick" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Quick/Quick.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		985FF2352B0DFF2E00F54BAF /* Quick */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 985FF2342B0DFF2E00F54BAF /* XCRemoteSwiftPackageReference "Quick" */;
+			productName = Quick;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 98A2611228B169B900FEE658 /* Project object */;
 }
