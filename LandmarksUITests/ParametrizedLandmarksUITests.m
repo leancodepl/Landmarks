@@ -5,17 +5,6 @@
 @end
 
 @implementation ParametrizedLandmarksUITests
-//- (instancetype)init {
-//  NSLog(@"Called init");
-//  return [super init];
-//}
-//
-- (instancetype)initWithSelector:(SEL)selector {
-  // NSLog(@"Called initWithSelector with arg: %@",
-  // NSStringFromSelector(selector));
-  
-  return [super initWithSelector:selector];
-}
 
 // Called when running all tests
 + (XCTestSuite *)defaultTestSuite {
