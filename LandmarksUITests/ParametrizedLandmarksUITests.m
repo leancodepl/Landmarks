@@ -71,10 +71,9 @@ static NSString *_selectedTest = nil;
   };
   
   IMP implementation = imp_implementationWithBlock(block);
-  // NSString *selectorStr = [NSString stringWithFormat:@"test_%@", name];
   SEL selector = NSSelectorFromString(name);
   class_addMethod(self, selector, implementation, "v@:");
-  
+
   NSMethodSignature *signature = [self instanceMethodSignatureForSelector:selector];
   NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
   invocation.selector = selector;
