@@ -7,8 +7,12 @@
 @implementation LandmarksUITests
 
 - (void)testFavorite {
+  NSLog(@"TESTLOG 1");
+
   XCUIApplication *app = [[XCUIApplication alloc] init];
   [app launch];
+
+  NSLog(@"TESTLOG 2");
 
   XCUIElementQuery *element = [[app descendantsMatchingType:XCUIElementTypeAny]
       matchingIdentifier:@"Turtle Rock"];
@@ -16,8 +20,11 @@
 }
 
 - (void)testFavoriteUsingPredicates {
+  NSLog(@"TESTLOG 3");
   XCUIApplication *app = [[XCUIApplication alloc] init];
   [app launch];
+
+  NSLog(@"TESTLOG 4");
 
   // Open landmark page
   NSPredicate *predicate =
@@ -45,7 +52,10 @@
       matchingPredicate:predicate];
   XCUIElement *element = query.allElementsBoundByIndex.firstObject;
 
+  NSLog(@"TESTLOG 5");
+
   XCTAssertTrue(element.exists);
+  NSLog(@"TESTLOG 6");
 }
 
 @end
