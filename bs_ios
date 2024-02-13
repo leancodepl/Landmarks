@@ -1,0 +1,106 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# bs_ios uploads app binaries for UI testing on BrowserStack.
+
+if [ -z "${BROWSERSTACK_CREDS:-}" ]; then
+    echo "Error: missing BROWSERSTACK_CREDS env var" >&2
+    exit 1
+fi
+
+if [ -z "${PROJECT_NAME:-}" ]; then
+    default_project="Unnamed iOS project"
+    echo 1>&2 "PROJECT_NAME not set, using default: $default_project"
+    PROJECT_NAME="$default_project"
+fi
+
+if [ -z "${IOS_DEVICES:-}" ]; then
+    default_devices="[\"iPhone 14-16\"]"
+    echo 1>&2 "IOS_DEVICES not set, using default: $default_devices"
+    IOS_DEVICES="$default_devices"
+fi
+
+if [ -z "${TEST_CASE_TIMEOUT:-}" ]; then
+    test_case_timeout=180
+    echo 1>&2 "TEST_CASE_TIMEOUT not set, using default: $test_case_timeout"
+    TEST_CASE_TIMEOUT="$test_case_timeout"
+fi
+
+if [ -z "${BUILD_TAG:-}" ]; then
+    BUILD_TAG=""
+    echo 1>&2 "BUILD_TAG not set"
+fi
+
+printf 1>&2 "\n"
+
+rm -rf ./Build
+
+xcodebuild build-for-testing -scheme Landmarks -destination 'generic/platform=iOS' -derivedDataPath ./Build
+
+printf 1>&2 "\nZipping test files...\n"
+
+cd Build/Build/Products/Debug-iphoneos
+
+mkdir -p Payload
+cp -r Landmarks.app Payload
+zip -r Landmarks.ipa Payload >/dev/null
+
+mv ../Landmarks_TestPlan_iphoneos16.0-arm64.xctestrun .
+
+zip --symlinks -r LandmarksUITests-Runner.zip Landmarks_TestPlan_iphoneos16.0-arm64.xctestrun LandmarksUITests-Runner.app
+
+printf 1>&2 "Completed zipping\n"
+
+printf 1>&2 "\nUploading app...\n"
+
+# https://www.browserstack.com/docs/app-automate/api-reference/xcuitest/apps#upload-an-app
+app_url="$(
+    curl -u "$BROWSERSTACK_CREDS" \
+        -X POST "https://api-cloud.browserstack.com/app-automate/xcuitest/v2/app" \
+        -F "file=@$PWD/Landmarks.ipa" | jq --raw-output .app_url
+)"
+
+echo 1>&2 "Uploaded app, url: $app_url"
+
+printf 1>&2 "\nUploading test...\n"
+
+# https://www.browserstack.com/docs/app-automate/api-reference/xcuitest/tests#upload-a-test-suite
+test_url="$(
+    curl -u "$BROWSERSTACK_CREDS" \
+        -X POST "https://api-cloud.browserstack.com/app-automate/xcuitest/v2/test-suite" \
+        -F "file=@$PWD/LandmarksUITests-Runner.zip" |
+        jq --raw-output .test_suite_url
+)"
+
+echo 1>&2 "Uploaded test, url: $test_url"
+
+printf 1>&2 "\nScheduling test execution...\n"
+
+# https://www.browserstack.com/docs/app-automate/api-reference/xcuitest/builds#execute-a-build
+if ! run_response="$(
+    curl -u "$BROWSERSTACK_CREDS" \
+        -X POST "https://api-cloud.browserstack.com/app-automate/xcuitest/v2/xctestrun-build" \
+        -H "Content-Type: application/json" \
+        --data-binary @- <<EOF
+{
+    "app": "$app_url",
+    "testSuite": "$test_url",
+    "project": "$PROJECT_NAME",
+    "devices": $IOS_DEVICES,
+    "deviceLogs": true,
+    "enableResultBundle": true,
+    "idleTimeout": $TEST_CASE_TIMEOUT,
+    "buildTag": "$BUILD_TAG"
+}
+EOF
+)"; then
+    echo 1>&2 "Error: failed to schedule test execution"
+    echo 1>&2 "$run_response"
+    exit 1
+fi
+
+printf 1>&2 "\nScheduled test execution\n"
+echo 1>&2 "$run_response"
+
+build_id="$(echo "$run_response" | jq --raw-output .build_id)"
+echo "$build_id"
